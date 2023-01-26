@@ -1,17 +1,16 @@
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Image } from "react-native";
 
-const InjectorItem = ({title}) => {
+const InjectorItem = ({ restaurant }) => {
   return (
     <View style={styles.InjectorContainer}>
       <Image 
       source={{ 
-        uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant1.jpeg",
+        uri: restaurant.image,
       }}
       style={styles.image}
     />
-    <Text style={styles.title}>{title}</Text>
-    <Text style={styles.subtitle}></Text>
+    <Text style={styles.title}>{restaurant.name}</Text>
+    <Text style={styles.subtitle}>$ {restaurant.deliveryFee} {restaurant.minDeliveryTime}-{restaurant.maxDeliveryTime} minutes</Text>
   </View>
     
   );
