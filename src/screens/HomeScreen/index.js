@@ -4,20 +4,16 @@ import restaurants from "../../../assets/data/restaurants.json";
 
 export default function HomeScreen() {
   return (
-    <View style={styles.page}>
-      <FlatList
+    <FlatList
         data={restaurants}
-        renderItem={({ item }) => <InjectorItem injector={item} />}
-        showsVerticalScrollIndicator={false}
-      />
-    </View>
+        renderItem={({ item }) => <InjectorItem restaurant={item} />}
+        showsVerticalScrollIndicator={false} 
+    />
   );
 }
 
-export default InjectorItem;
+//export default InjectorItem;
 
-const styles = StyleSheet.create({
-  page: {
-    padding: 10,
-  },
-});
+const styles = StyleSheet.create({});
+  //page: {
+    //padding: 10,
