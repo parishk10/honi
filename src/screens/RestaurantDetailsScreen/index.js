@@ -34,4 +34,38 @@ const RestaurantDetailsPage = () => {
   );
 };
 
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+  },
+  iconContainer: {
+    backgroundColor: "red",
+    padding: 20,
+    position: "absolute",
+    top: 40,
+    left: 10,
+    borderRadius: 10,
+
+  },
+  image: {
+    width: "100%",
+    aspectRatio: 5/3,
+
+  },
+  title: {
+    fontSize: 35,
+    fontWeight: "600"
+    marginVertical: 10,
+  },
+  subtitle: {
+    fontSize: 15,
+    color: "#525252",
+  },
+  container: {
+    margin: 10,
+  },
+  }
+
+})
+
 export default RestaurantDetailsPage;

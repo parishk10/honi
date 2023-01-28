@@ -4,11 +4,13 @@ import restaurants from "../../../assets/data/restaurants.json";
 
 export default function HomeScreen() {
   return (
-    <FlatList
-        data={restaurants}
-        renderItem={({ item }) => <InjectorItem restaurant={item} />}
-        showsVerticalScrollIndicator={false} 
-    />
+    <View style={styles.page}>
+      <FlatList
+          data={restaurants}
+          renderItem={({ item }) => <InjectorItem restaurant={item} />}
+          showsVerticalScrollIndicator={false} 
+      />
+    </View>
   );
 }
 
