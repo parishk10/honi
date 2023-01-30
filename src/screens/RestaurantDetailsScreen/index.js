@@ -1,85 +1,68 @@
-
-
-import { useState, useEffect } from "react";
-import {
-  View,
-  FlatList,
-  ActivityIndicator,
-  Pressable,
-  Text,
-} from "react-native";
+import { View, Text, Image, FlatList, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import DishListItem from "../../components/DishListItem";
-import Header from "./Header";
-import styles from "./styles";
-import { useRoute, useNavigation } from "@react-navigation/native";
-import { DataStore } from "aws-amplify";
-import { Restaurant, Dish } from "../../models";
-import { useBasketContext } from "../../contexts/BasketContext";
+//import DishListItem from "../../components/DishListItem";
+import restaurants from "../../../assets/data/restaurants.json";
+//import Header from "./Header";
+//import styles from "./styles";
+//import styles from "./styles";
+//import { useRoute, useNavigation } from "@react-navigation/native";
+
+const restaurant = restaurants[0];
 
 const RestaurantDetailsPage = () => {
-  const [restaurant, setRestaurant] = useState(null);
-  const [dishes, setDishes] = useState([]);
-
-  const route = useRoute();
-  const navigation = useNavigation();
-
-  const id = route.params?.id;
-
-  const {
-    setRestaurant: setBasketRestaurant,
-    basket,
-    basketDishes,
-  } = useBasketContext();
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-    setBasketRestaurant(null);
-    // fetch the restaurant with the id
-    DataStore.query(Restaurant, id).then(setRestaurant);
-
-    DataStore.query(Dish, (dish) => dish.restaurantID("eq", id)).then(
-      setDishes
-    );
-  }, [id]);
-
-  useEffect(() => {
-    setBasketRestaurant(restaurant);
-  }, [restaurant]);
-
-  if (!restaurant) {
-    return <ActivityIndicator size={"large"} color="gray" />;
-  }
-
   return (
     <View style={styles.page}>
-      <FlatList
-        ListHeaderComponent={() => <Header restaurant={restaurant} />}
-        data={dishes}
-        renderItem={({ item }) => <DishListItem dish={item} />}
-        keyExtractor={(item) => item.name}
-      />
+      <Image source={{uri: restaurant.image}} style={styles.image}/>
+
       <Ionicons
-        onPress={() => navigation.goBack()}
         name="arrow-back-circle"
         size={45}
         color="white"
         style={styles.iconContainer}
       />
-      {basket && (
-        <Pressable
-          onPress={() => navigation.navigate("Basket")}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>
-            Open basket ({basketDishes.length})
-          </Text>
-        </Pressable>
-      )}
+
+      <View style={styles.container}>
+        <Text style={styles.title}>{restaurant.name}</Text>
+        <Text style={styles.subtitle}>
+          $ {restaurant.deliveryFee} &#8226; {restaurant.minDeliveryTime}-
+          {restaurant.minDeliveryTime} minutes
+        </Text>
+      </View>
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+  },
+  iconContainer: {
+    position: "absolute",
+    top: 40,
+    left: 10,
+  },
+  image: {
+    width: "100%",
+    aspectRatio: 5 / 3,
+  },
+  title: {
+    fontSize: 35,
+    fontWeight: "600",
+    marginVertical: 10,
+  },
+  menuTitle: {
+    marginTop: 20,
+    fontSize: 18,
+    letterSpacing: 0.7,
+  },
+  subtitle: {
+    fontSize: 15,
+    color: "#525252",
+  },
+  container: {
+    margin: 10,
+  },
+});
+
 export default RestaurantDetailsPage;
+
