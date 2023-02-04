@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+//import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
 import RestaurantDetailsScreen from "../screens/RestaurantDetailsScreen";
 import DishDetailsScreen from "../screens/DishDetailsScreen";
@@ -13,14 +13,15 @@ const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="HomeTabs" component={HomeTabs} />
+    <Stack.Navigator initialRouteName="Restaurant">
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Restaurant" component={RestaurantDetailsScreen} />
     </Stack.Navigator>
   );
 };
 
-const Tab = createMaterialBottomTabNavigator();
-
+//const Tab = createMaterialBottomTabNavigator();
+/*{
 const HomeTabs = () => {
   return (
     <Tab.Navigator barStyle={{ backgroundColor: "white" }}>
@@ -78,5 +79,5 @@ const OrderStackNavigator = () => {
     </OrdersStack.Navigator>
   );
 };
-
+}*/
 export default RootNavigator;
