@@ -4,12 +4,15 @@ import DishListItem from "../../components/DishListItem";
 import restaurants from "../../../assets/data/restaurants.json";
 import Header from "./Header";
 import styles from "./styles";
-//import styles from "./styles";
-//import { useRoute, useNavigation } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
 const restaurant = restaurants[0];
 
 const RestaurantDetailsPage = () => {
+  const route = useRoute();
+
+  const id = route.params?.id;
+  console.warn(id);
   return (
     <View style={styles.page}>
 
