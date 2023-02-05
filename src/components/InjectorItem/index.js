@@ -7,6 +7,7 @@ const InjectorItem = ({ restaurant }) => {
   const onPress = () => {
     navigation.navigate("Restaurant", {id: restaurant.id});
   };
+  
   return (
     <Pressable onPress={onPress} style={styles.InjectorContainer}>
       <Image 

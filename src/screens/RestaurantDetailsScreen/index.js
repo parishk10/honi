@@ -10,6 +10,7 @@ const restaurant = restaurants[0];
 
 const RestaurantDetailsPage = () => {
   const route = useRoute();
+  const navigation = useNavigation();
 
   const id = route.params?.id;
   console.warn(id);
@@ -22,6 +23,7 @@ const RestaurantDetailsPage = () => {
         renderItem={({item}) => <DishListItem dish={item} />}
       />
       <Ionicons
+        onPress={() => navigation.goBack()}
         name="arrow-back-circle"
         size={45}
         color="white"
